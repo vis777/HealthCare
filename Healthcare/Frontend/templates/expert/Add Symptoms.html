@@ -1,0 +1,44 @@
+{% extends 'expertindex.html' %}
+{% block content %}
+<body>
+  <form id="form1" name="form1" method="post" action="{% url 'savesymptoms' %}#about" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label></label>
+    <table class="table table-striped">
+      <tr>
+        <th scope="row">Disease</th>
+        <td>
+          <label>
+            <select name="disease">
+              {% for i in dis %}
+                <option>{{i.DName}}</option>
+              {% endfor %}
+            </select>
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Symptoms</th>
+        <td>
+          <label>
+            <input type="text" name="symptom" class="form-control" required pattern="[A-Za-z.]{3,25}" />
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <th colspan="2" scope="row">
+          <label>
+            <input type="submit" name="Submit" value="Add" class="btn btn-info" />
+          </label>
+        </th>
+      </tr>
+    </table>
+  </form>
+
+  <!-- Button to go to manage symptoms page outside the form -->
+  <form action="{% url 'managesymptoms' %}#about">
+    <input type="submit" name="Submit" value="Go to Manage Symptoms" class="btn btn-info" />
+  </form>
+</body>
+</html>
+{% endblock %}

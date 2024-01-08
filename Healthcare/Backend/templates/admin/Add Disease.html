@@ -1,0 +1,54 @@
+{% extends 'adminindex.html' %}
+{% block content %}
+<body>
+<div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Add Disease</h4>
+                   <form class="forms-sample" method="post" action="{% url 'savedisease' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+
+    <div class="form-group">
+    <label for="exampleInputName1"> Disease</label>
+    <input type="text" class="form-control" id="exampleInputName1" name="disease" required pattern="[A-Z a-z.]{3,25}"/>
+  </div>
+
+                    <tr align="center">
+                      <td colspan="6">
+                        <input type="submit" name="Submit" value="Add" class="btn btn-info"/>
+                      </td>
+                    </tr>
+                   </form>
+              </div>
+</div>
+</div>
+</form>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+{% if messages %}
+  {% for i in messages %}
+     {% if i.tags == 'warning' %}
+        <script>
+            swal('{{i}}','','warning')
+        </script>
+     {% elif i.tags == 'error' %}
+        <script>
+            swal('{{i}}','','error')
+        </script>
+     {% elif i.tags == 'success' %}
+        <script>
+            swal('{{i}}','','success')
+        </script>
+     {% else %}
+        <script>
+            swal('{{i}}','','info')
+        </script>
+     {% endif %}
+  {% endfor %}
+{% endif %}
+</body>
+</html>
+{% endblock %}
+

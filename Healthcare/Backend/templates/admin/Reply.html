@@ -1,0 +1,22 @@
+{% extends 'adminindex.html' %}
+{% block content %}
+<body>
+<form id="form1" name="form1" method="post" action="{% url 'savereply' %}">
+  {% csrf_token %}
+  <table class="table table-striped">
+    <tr>
+      <th width="97" scope="row">Reply</th>
+      <td width="87"><label>
+        <input type="text" name="reply" required pattern="[A-Z a-z.]{3,25}"/>
+      </label></td>
+    </tr>
+    <tr>
+      <th colspan="2" scope="row"><label>
+        <input type="submit" name="Submit" value="Send" class="btn btn-info"/>
+      </label></th>
+    </tr>
+  </table>
+</form>
+</body>
+<!--</html>-->
+{% endblock %}

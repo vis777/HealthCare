@@ -1,0 +1,88 @@
+{% extends 'adminindex.html' %}
+{% block content %}
+<body>
+<div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Add Doctors</h4>
+                   <form class="forms-sample" method="post" action="{% url 'saveexpert' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+
+    <div class="form-group">
+    <label for="exampleInputName1"> First Name</label>
+    <input type="text" class="form-control" id="exampleInputName1" name="fname" required pattern="[A-Z a-z.]{3,25}"/>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputName2"> Last Name</label>
+    <input type="text" class="form-control" id="exampleInputName2"  name="lname" required pattern="[A-Z a-z.]{3,25}"/>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputName3"> Place</label>
+    <input type="text" class="form-control" id="exampleInputName3" name="place" required pattern="[A-Z a-z.]{3,25}"/>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputName4"> Post</label>
+    <input type="text" class="form-control" id="exampleInputName4" name="post" required pattern="[A-Z a-z.]{3,25}"/>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputName5"> Pin</label>
+    <input type="text" class="form-control" id="exampleInputName5" name="pin" required pattern="[0-9]{6}"/>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputName6"> Email</label>
+    <input type="text" class="form-control" id="exampleInputName6" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9]+\.[a-z]{2,3}"/>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputName7"> Phone</label>
+    <input type="text" class="form-control" id="exampleInputName7" name="phone" required pattern="[6789][0-9]{9}"/>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputName8"> Department</label>
+    <input type="text" class="form-control" id="exampleInputName8" name="department"/>
+  </div>
+
+      <div class="form-group">
+    <label for="exampleInputName9"> Username</label>
+    <input type="text" class="form-control" id="exampleInputName9" name="username"/>
+  </div>
+      <div class="form-group">
+    <label for="exampleInputName10"> Password</label>
+    <input type="text" class="form-control" id="exampleInputName10" name="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"/>
+  </div>
+                    <tr align="center">
+                      <td colspan="6">
+                        <input type="submit" name="Submit" value="Add" class="btn btn-info"/>
+                      </td>
+                    </tr>
+                   </form>
+              </div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+{% if messages %}
+  {% for i in messages %}
+     {% if i.tags == 'warning' %}
+        <script>
+            swal('{{i}}','','warning')
+        </script>
+     {% elif i.tags == 'error' %}
+        <script>
+            swal('{{i}}','','error')
+        </script>
+     {% elif i.tags == 'success' %}
+        <script>
+            swal('{{i}}','','success')
+        </script>
+     {% else %}
+        <script>
+            swal('{{i}}','','info')
+        </script>
+     {% endif %}
+  {% endfor %}
+{% endif %}
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends 'adminindex.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <div class="col-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Expert Details</h4>
+
+        <div class="col-md-10">
+          <div class="card">
+            <div class="table-responsive pt-6">
+              <table class="table table-striped project-orders-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Department</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for d in blkexp %}
+                    <tr>
+                      <td>{{ d.First_Name }} {{ d.Last_Name }}</td>
+                      <td>{{ d.Place }} {{ d.Post }} {{ d.Pin }}</td>
+                      <td>{{ d.Email }}</td>
+                      <td>{{ d.Phone }}</td>
+                      <td>{{ d.Department }}</td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          {% if d.is_blocked %}
+                            <button class="toggleBlockBtn btn btn-success btn-sm btn-icon-text mr-3" data-expert-id="{{ d.id }}">
+                              Unblock
+                              <i class="typcn typcn-edit btn-icon-append"></i>
+                            </button>
+                          {% else %}
+                            <button class="toggleBlockBtn btn btn-danger btn-sm btn-icon-text" data-expert-id="{{ d.id }}">
+                              Block
+                              <i class="typcn typcn-delete-outline btn-icon-append"></i>
+                            </button>
+                          {% endif %}
+                        </div>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.toggleBlockBtn').forEach(button => {
+        button.addEventListener('click', function () {
+            var expertId = this.getAttribute('data-expert-id');
+            var url = "{% url 'toggle_block_status' 123 %}".replace('123', expertId);
+            // Send an AJAX request to toggle the block status
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'same-origin'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Update the button text based on the response
+                    this.innerText = data.status ? "Unblock" : "Block";
+                    this.classList.toggle("btn-success", data.status);
+                    this.classList.toggle("btn-danger", !data.status);
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>
+{% endblock %}

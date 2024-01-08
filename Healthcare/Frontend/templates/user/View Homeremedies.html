@@ -1,0 +1,21 @@
+{% extends 'userindex.html' %}
+{% block content %}
+<body>
+  <table class="table table-striped">
+    <tr>
+      <th scope="col">Disease</th>
+      <th scope="col">Discription</th>
+      <th scope="col">Remedy</th>
+    </tr>
+    {% for i in hmrem %}
+    <tr>
+      <td>{{i.DName}}</td>
+      <td>{{i.HName}}</td>
+      <td>{{i.Remedy}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

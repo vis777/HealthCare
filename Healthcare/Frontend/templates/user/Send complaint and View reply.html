@@ -1,0 +1,28 @@
+{% extends 'userindex.html' %}
+{% block content %}
+<body>
+  <table class="table table-striped">
+    <tr>
+      <th scope="col">Complaint</th>
+      <th scope="col">Date</th>
+      <th scope="col">Reply</th>
+    </tr>
+    {% for i in com %}
+    <tr>
+      <td>{{i.Complaint}}</td>
+      <td>{{i.Date}}</td>
+      <td>{{i.Reply}}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+      <td colspan="3"><label>
+        <form action="{% url 'sendcomplain' %}">
+                        <input type="submit" name="Submit" value="Add" class="btn btn-info"/>
+                        </form>
+      </label></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

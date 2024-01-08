@@ -1,0 +1,53 @@
+{% extends 'adminindex.html' %}
+{% block content %}
+<body>
+<div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Add Dataset</h4>
+                   <form class="forms-sample" method="post" action="{% url 'savedataset' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                       <div class="form-group">
+                           <label for="exampleInputName1"> Question</label>
+                           <input type="text" class="form-control" id="exampleInputName1" name="question"/>
+                       </div>
+                       <div class="form-group">
+                           <label for="exampleInputName2"> Answer</label>
+                           <input type="text" class="form-control" id="exampleInputName2" name="answer"/>
+                       </div>
+    <tr align="center">
+      <th colspan="2" scope="row"><label>
+        <input type="submit" name="Submit" value="Add" class="btn btn-info"/>
+      </label></th>
+    </tr>
+</form>
+                </div>
+              </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+{% if messages %}
+  {% for i in messages %}
+     {% if i.tags == 'warning' %}
+        <script>
+            swal('{{i}}','','warning')
+        </script>
+     {% elif i.tags == 'error' %}
+        <script>
+            swal('{{i}}','','error')
+        </script>
+     {% elif i.tags == 'success' %}
+        <script>
+            swal('{{i}}','','success')
+        </script>
+     {% else %}
+        <script>
+            swal('{{i}}','','info')
+        </script>
+     {% endif %}
+  {% endfor %}
+{% endif %}
+</body>
+</html>
+{% endblock %}

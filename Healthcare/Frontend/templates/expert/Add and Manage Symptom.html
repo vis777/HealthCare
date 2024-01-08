@@ -1,0 +1,32 @@
+{% extends 'expertindex.html' %}
+{% block content %}
+<body>
+ <table class="table table-striped">
+    <tr>
+      <th scope="col">Disease</th>
+      <th scope="col">Symptoms</th>
+    </tr>
+    {% for i in sym %}
+    <tr>
+      <td>{{i.DName}}</td>
+      <td>{{i.Symptom}}</td>
+      <td><form action="{% url 'deletesymptom' dataid=i.id %}">
+                            <button type="submit" class="btn btn-danger btn-sm btn-icon-text">
+                              Delete
+                              <i class="typcn typcn-delete-outline btn-icon-append"></i>
+                            </button>
+                              </form></td></td>
+    </tr>
+    {% endfor %}
+    <tr>
+      <td colspan="3"><label>
+        <form action="{% url 'symptompage' %}#about">
+                        <input type="submit" name="Submit" value="Add" class="btn btn-info"/>
+                        </form>
+      </label></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'expertindex.html' %}
+{% block content %}
+<body>
+<form id="form1" name="form1" method="post" action="{% url 'send_message' %}">
+  <table class="table table-striped">
+    <tr>
+      <th scope="row">Patients</th>
+      <td>&nbsp;</td>
+    </tr>
+    {% for i in val %}
+    <tr>
+      <th scope="row">{{ i.First_Name }} {{ i.Last_Name }}</th>
+      <!-- Adjust the URL pattern to include a unique identifier for each user -->
+      <td><p><a href="{% url 'chat_with_user' user_id=i.id %}" class="btn btn-primary">Chat</a></p></td>
+    </tr>
+    {% endfor %}
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

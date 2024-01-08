@@ -1,0 +1,39 @@
+{% extends 'expertindex.html' %}
+{% block content %}
+<body>
+<form id="form1" name="form1" method="post" action="{% url 'savesuggestion' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  <table class="table table-striped">
+    <tr>
+      <th scope="row">Patients</th>
+      <td><label>
+        <select name="user" class="form-control" required >
+          <option value="">Select</option>
+          {% for i in use %}
+          <option value="{{ i.id }}">{{i.First_Name}} {{i.Last_Name}}</option>
+          {% endfor %}
+        </select>
+      </label></td>
+    </tr>  <tr>
+      <th scope="row">Suggestions</th>
+      <td><label>
+        <input type="text" name="suggestion" class="form-control" required />
+      </label></td>
+    </tr>
+    <tr>
+      <th scope="row">Description</th>
+      <td><label>
+        <input type="text" name="discription" class="form-control" required/>
+      </label></td>
+    </tr>
+    <tr>
+      <th colspan="2" scope="row"><label>
+        <input type="submit" name="Submit" value="Add" class="btn btn-info"/>
+      </label></th>
+    </tr>
+  </table>
+  <label></label>
+</form>
+</body>
+</html>
+{% endblock %}
